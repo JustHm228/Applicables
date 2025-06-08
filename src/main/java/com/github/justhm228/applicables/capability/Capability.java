@@ -49,6 +49,24 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 		};
 	}
 
+	static <T extends Targetable<T>> Capability.Instant<T> ofInstant(final Consumer<ApplicationContext<T>> applier, final Consumer<ApplicationContext<T>> finisher) {
+
+		return new Capability.Instant<>() {
+
+			@Override()
+			public void onApply(final ApplicationContext<T> ctx) {
+
+				applier.accept(ctx);
+			}
+
+			@Override()
+			public void onFinish(final ApplicationContext<T> ctx) {
+
+				finisher.accept(ctx);
+			}
+		};
+	}
+
 	void onApply(final ApplicationContext<T> ctx);
 
 	void onFinish(final ApplicationContext<T> ctx);
@@ -93,6 +111,18 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 		default void apply(final ApplicationContext<T> ctx) {
 
 			Capability.super.apply(ctx);
+		}
+	}
+
+	interface Instant<T extends Targetable<T>> extends Capability<T> {
+
+		@Override()
+		default void apply(final ApplicationContext<T> ctx) {
+
+			try (ctx) {
+
+				Capability.super.apply(ctx);
+			}
 		}
 	}
 }
