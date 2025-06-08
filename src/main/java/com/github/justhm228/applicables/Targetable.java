@@ -29,6 +29,11 @@ public interface Targetable<T extends Targetable<T>> {
 
 	void apply(final Applicable<T> applicable);
 
+	interface Adapted<T extends Adapted<T, O>, O> extends Targetable<T> {
+
+		O getTarget();
+	}
+
 	@FunctionalInterface()
 	interface Delegated<T extends Targetable<T>> extends Targetable<T> {
 
