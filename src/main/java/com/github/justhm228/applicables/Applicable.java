@@ -32,11 +32,11 @@ public interface Applicable<T extends Targetable<T>> {
 
 	void apply(final ApplicationContext<T> ctx);
 
-	default void onUpdate(final ApplicationContext<T> target) {
+	default void onUpdate(final ApplicationContext<T> ctx) {
 
 	}
 
-	default void onFinish(final ApplicationContext<T> target) {
+	default void onFinish(final ApplicationContext<T> ctx) {
 
 	}
 }
