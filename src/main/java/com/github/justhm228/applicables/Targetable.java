@@ -27,6 +27,11 @@ package com.github.justhm228.applicables;
 @FunctionalInterface()
 public interface Targetable<T extends Targetable<T>> {
 
+	static <T extends Targetable.Adapted<T, O>, O> Targetable.Adapted<T, O> adapt(final O o, final TargetAdapter<T, O> adapter) {
+
+		return adapter.adapt(o);
+	}
+
 	void apply(final Applicable<T> applicable);
 
 	interface Adapted<T extends Adapted<T, O>, O> extends Targetable<T> {
