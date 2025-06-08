@@ -31,6 +31,10 @@ public interface Applicable<T extends Targetable<T>> {
 
 	void onApply(final T target);
 
+	default void onUpdate(final T target) {
+
+	}
+
 	default void onFinish(final T target) {
 
 	}
