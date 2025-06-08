@@ -28,15 +28,15 @@ import com.github.justhm228.applicables.context.ApplicationContext;
 import com.github.justhm228.applicables.target.Targetable;
 
 @FunctionalInterface()
-public interface Applicable<T extends Targetable<T>, A extends Applicable<T, A>> {
+public interface Applicable<T extends Targetable<T>> {
 
-	void apply(final ApplicationContext<T, A> ctx);
+	void apply(final ApplicationContext<T> ctx);
 
-	default void onUpdate(final ApplicationContext<T, A> target) {
+	default void onUpdate(final ApplicationContext<T> target) {
 
 	}
 
-	default void onFinish(final ApplicationContext<T, A> target) {
+	default void onFinish(final ApplicationContext<T> target) {
 
 	}
 }

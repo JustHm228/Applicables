@@ -41,12 +41,12 @@ public interface TargetAdapter<T extends Targetable.Adapted<T, O>, O> {
 			}
 
 			@Override()
-			public <A extends Applicable<T, A>> ApplicationContext<T, A> apply(final A applicable) {
+			public ApplicationContext<T> apply(final Applicable<T> applicable) {
 
 				return TargetAdapter.this.apply(o, applicable);
 			}
 		};
 	}
 
-	<A extends Applicable<T, A>> ApplicationContext<T, A> apply(final O o, final A applicable);
+	ApplicationContext<T> apply(final O o, final Applicable<T> applicable);
 }
