@@ -27,10 +27,13 @@ package com.github.justhm228.applicables.context;
 import com.github.justhm228.applicables.Applicable;
 import com.github.justhm228.applicables.target.TargetHolder;
 import com.github.justhm228.applicables.target.Targetable;
+import java.util.function.Consumer;
 
 public interface ApplicationContext<T extends Targetable<T>> extends TargetHolder.Delegated<T>, AutoCloseable {
 
 	Applicable<T> getApplied();
+
+	void addFinishHook(final Consumer<ApplicationContext<T>> finishHook);
 
 	void finish();
 
