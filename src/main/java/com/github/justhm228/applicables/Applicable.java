@@ -30,4 +30,8 @@ import com.github.justhm228.applicables.target.Targetable;
 public interface Applicable<T extends Targetable<T>> {
 
 	void onApply(final T target);
+
+	default void onFinish(final T target) {
+
+	}
 }
