@@ -30,7 +30,7 @@ public interface Targetable<T extends Targetable<T>> {
 	void apply(final Applicable<T> applicable);
 
 	@FunctionalInterface()
-	interface Delegated<T extends Delegated<T>> extends Targetable<T> {
+	interface Delegated<T extends Targetable<T>> extends Targetable<T> {
 
 		Targetable<T> getTarget();
 
