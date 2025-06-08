@@ -27,6 +27,7 @@ package com.github.justhm228.applicables.target;
 public sealed interface TargetHolder<T extends Targetable<T>> extends Targetable.Delegated<T>
 		permits TargetHolder.Delegated, TargetHolder.Immutable, TargetHolder.Mutable {
 
+	@FunctionalInterface()
 	non-sealed interface Delegated<T extends Targetable<T>> extends TargetHolder<T> {
 
 		TargetHolder<T> getTargetHolder();
