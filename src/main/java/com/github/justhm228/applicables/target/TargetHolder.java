@@ -36,4 +36,31 @@ public interface TargetHolder<T extends Targetable<T>> extends Targetable.Delega
 			return getTargetHolder().getTarget();
 		}
 	}
+
+	@FunctionalInterface()
+	interface Immutable<T extends Targetable<T>> extends TargetHolder<T> {
+
+		@FunctionalInterface()
+		interface Delegated<T extends Targetable<T>> extends Immutable<T>, TargetHolder.Delegated<T> {
+
+		}
+	}
+
+	interface Mutable<T extends Targetable<T>> extends TargetHolder<T> {
+
+		void setTarget(final T target);
+
+		@FunctionalInterface()
+		interface Delegated<T extends Targetable<T>> extends Mutable<T>, TargetHolder.Delegated<T> {
+
+			@Override()
+			TargetHolder.Mutable<T> getTargetHolder();
+
+			@Override()
+			default void setTarget(final T target) {
+
+				getTargetHolder().setTarget(target);
+			}
+		}
+	}
 }
