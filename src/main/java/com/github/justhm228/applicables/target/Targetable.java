@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-package com.github.justhm228.applicables;
+package com.github.justhm228.applicables.target;
+
+import com.github.justhm228.applicables.Applicable;
 
 @FunctionalInterface()
 public interface Targetable<T extends Targetable<T>> {

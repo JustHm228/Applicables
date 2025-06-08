@@ -24,6 +24,8 @@
 
 package com.github.justhm228.applicables;
 
+import com.github.justhm228.applicables.target.Targetable;
+
 @FunctionalInterface()
 public interface Applicable<T extends Targetable<T>> {
 

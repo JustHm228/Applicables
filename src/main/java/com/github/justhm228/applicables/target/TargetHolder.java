@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-package com.github.justhm228.applicables;
+package com.github.justhm228.applicables.target;
+
+import com.github.justhm228.applicables.Applicable;
 
 public interface TargetHolder<T extends Targetable<T>> extends Targetable.Delegated<T> {
 
