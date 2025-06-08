@@ -24,18 +24,7 @@
 
 package com.github.justhm228.applicables.target;
 
-import com.github.justhm228.applicables.Applicable;
-import com.github.justhm228.applicables.context.ApplicationContext;
-
 public interface TargetHolder<T extends Targetable<T>> extends Targetable.Delegated<T> {
-
-	T getTarget();
-
-	@Override()
-	default <A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable) {
-
-		return getTarget().apply(applicable);
-	}
 
 	interface Delegated<T extends Targetable<T>> extends TargetHolder<T> {
 
