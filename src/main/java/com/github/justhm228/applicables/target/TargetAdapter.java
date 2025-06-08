@@ -25,6 +25,7 @@
 package com.github.justhm228.applicables.target;
 
 import com.github.justhm228.applicables.Applicable;
+import com.github.justhm228.applicables.context.ApplicationContext;
 
 @FunctionalInterface()
 public interface TargetAdapter<T extends Targetable.Adapted<T, O>, O> {
@@ -40,12 +41,12 @@ public interface TargetAdapter<T extends Targetable.Adapted<T, O>, O> {
 			}
 
 			@Override()
-			public void apply(final Applicable<T> applicable) {
+			public <A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable) {
 
-				TargetAdapter.this.apply(o, applicable);
+				return TargetAdapter.this.apply(o, applicable);
 			}
 		};
 	}
 
-	void apply(final O o, final Applicable<T> applicable);
+	<A extends Applicable<T>> ApplicationContext<T, A> apply(final O o, final A applicable);
 }

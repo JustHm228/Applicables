@@ -22,35 +22,15 @@
  * SOFTWARE.
  */
 
-package com.github.justhm228.applicables.target;
+package com.github.justhm228.applicables.context;
 
 import com.github.justhm228.applicables.Applicable;
-import com.github.justhm228.applicables.context.ApplicationContext;
+import com.github.justhm228.applicables.target.TargetHolder;
+import com.github.justhm228.applicables.target.Targetable;
 
-@FunctionalInterface()
-public interface Targetable<T extends Targetable<T>> {
+public interface ApplicationContext<T extends Targetable<T>, A extends Applicable<T>> extends TargetHolder.Delegated<T> {
 
-	static <T extends Targetable.Adapted<T, O>, O> Targetable.Adapted<T, O> adapt(final O o, final TargetAdapter<T, O> adapter) {
+	A getApplied();
 
-		return adapter.adapt(o);
-	}
-
-	<A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable);
-
-	interface Adapted<T extends Adapted<T, O>, O> extends Targetable<T> {
-
-		O getTarget();
-	}
-
-	@FunctionalInterface()
-	interface Delegated<T extends Targetable<T>> extends Targetable<T> {
-
-		T getTarget();
-
-		@Override()
-		default <A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable) {
-
-			return getTarget().apply(applicable);
-		}
-	}
+	void finish();
 }
