@@ -27,5 +27,23 @@ package com.github.justhm228.applicables;
 @FunctionalInterface()
 public interface TargetAdapter<T extends Targetable.Adapted<T, O>, O> {
 
+	default Targetable.Adapted<T, O> adapt(final O o) {
+
+		return new Targetable.Adapted<>() {
+
+			@Override()
+			public O getTarget() {
+
+				return o;
+			}
+
+			@Override()
+			public void apply(final Applicable<T> applicable) {
+
+				TargetAdapter.this.apply(o, applicable);
+			}
+		};
+	}
+
 	void apply(final O o, final Applicable<T> applicable);
 }
