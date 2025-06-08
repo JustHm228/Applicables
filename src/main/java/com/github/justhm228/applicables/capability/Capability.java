@@ -46,4 +46,22 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 			ctx.addFinishHook(this::onFinish);
 		}
 	}
+
+	@FunctionalInterface()
+	interface Delegated<T extends Targetable<T>> extends Capability<T> {
+
+		Capability<T> getCapability();
+
+		@Override()
+		default void onApply(final ApplicationContext<T> ctx) {
+
+			getCapability().onApply(ctx);
+		}
+
+		@Override()
+		default void onFinish(final ApplicationContext<T> ctx) {
+
+			getCapability().onFinish(ctx);
+		}
+	}
 }
