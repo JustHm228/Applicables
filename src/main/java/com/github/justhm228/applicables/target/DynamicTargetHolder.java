@@ -30,7 +30,7 @@ import static java.util.Objects.requireNonNull;
 
 public class DynamicTargetHolder<T extends Targetable<T>> implements TargetHolder.Mutable<T> {
 
-	private T target;
+	protected T target;
 
 	public DynamicTargetHolder(final T target) throws NullPointerException {
 
