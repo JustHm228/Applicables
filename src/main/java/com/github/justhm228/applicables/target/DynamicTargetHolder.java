@@ -32,6 +32,8 @@ public class DynamicTargetHolder<T extends Targetable<T>> implements TargetHolde
 
 	protected T target;
 
+	protected final Object lock = new Object();
+
 	public DynamicTargetHolder(final T target) throws NullPointerException {
 
 		super();
@@ -41,13 +43,19 @@ public class DynamicTargetHolder<T extends Targetable<T>> implements TargetHolde
 	@Override()
 	public void setTarget(final T target) throws NullPointerException {
 
-		this.target = requireNonNull(target);
+		synchronized (lock) {
+
+			this.target = requireNonNull(target);
+		}
 	}
 
 	@Override()
 	public T getTarget() {
 
-		return target;
+		synchronized (lock) {
+
+			return target;
+		}
 	}
 
 	@Override()
