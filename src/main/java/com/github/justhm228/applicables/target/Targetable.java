@@ -44,7 +44,7 @@ public interface Targetable<T extends Targetable<T>> {
 	@FunctionalInterface()
 	interface Delegated<T extends Targetable<T>> extends Targetable<T> {
 
-		Targetable<T> getTarget();
+		T getTarget();
 
 		@Override()
 		default void apply(final Applicable<T> applicable) {
