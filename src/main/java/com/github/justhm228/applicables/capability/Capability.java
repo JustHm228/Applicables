@@ -37,6 +37,13 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 	@Override()
 	default void apply(final ApplicationContext<T> ctx) {
 
-		onApply(ctx);
+		try {
+
+			onApply(ctx);
+
+		} finally {
+
+			ctx.addFinishHook(this::onFinish);
+		}
 	}
 }
