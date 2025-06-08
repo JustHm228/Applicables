@@ -31,15 +31,33 @@ import java.util.function.Consumer;
 
 public interface ApplicationContext<T extends Targetable<T>> extends TargetHolder.Delegated<T>, AutoCloseable {
 
+	State getState();
+
 	Applicable<T> getApplied();
 
 	void addFinishHook(final Consumer<ApplicationContext<T>> finishHook);
 
 	void finish();
 
+	default boolean isFinished() {
+
+		return getState() == State.FINISHED;
+	}
+
+	default boolean isRunning() {
+
+		return getState() == State.RUNNING;
+	}
+
 	@Override()
 	default void close() {
 
 		finish();
+	}
+
+	enum State {
+
+		FINISHED,
+		RUNNING,
 	}
 }
