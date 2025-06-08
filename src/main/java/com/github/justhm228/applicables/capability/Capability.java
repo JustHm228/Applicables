@@ -48,9 +48,15 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 	}
 
 	@FunctionalInterface()
-	interface Delegated<T extends Targetable<T>> extends Capability<T> {
+	interface Delegated<T extends Targetable<T>> extends Capability<T>, Applicable.Delegated<T> {
 
 		Capability<T> getCapability();
+
+		@Override()
+		default Capability<T> getApplicable() {
+
+			return getCapability();
+		}
 
 		@Override()
 		default void onApply(final ApplicationContext<T> ctx) {
@@ -62,6 +68,12 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 		default void onFinish(final ApplicationContext<T> ctx) {
 
 			getCapability().onFinish(ctx);
+		}
+
+		@Override()
+		default void apply(final ApplicationContext<T> ctx) {
+
+			Capability.super.apply(ctx);
 		}
 	}
 }

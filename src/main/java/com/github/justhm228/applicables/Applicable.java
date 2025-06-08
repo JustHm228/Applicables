@@ -31,4 +31,16 @@ import com.github.justhm228.applicables.target.Targetable;
 public interface Applicable<T extends Targetable<T>> {
 
 	void apply(final ApplicationContext<T> ctx);
+
+	@FunctionalInterface()
+	interface Delegated<T extends Targetable<T>> extends Applicable<T> {
+
+		Applicable<T> getApplicable();
+
+		@Override()
+		default void apply(final ApplicationContext<T> ctx) {
+
+			getApplicable().apply(ctx);
+		}
+	}
 }
