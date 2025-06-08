@@ -27,8 +27,27 @@ package com.github.justhm228.applicables.capability;
 import com.github.justhm228.applicables.Applicable;
 import com.github.justhm228.applicables.context.ApplicationContext;
 import com.github.justhm228.applicables.target.Targetable;
+import java.util.function.Consumer;
 
 public interface Capability<T extends Targetable<T>> extends Applicable<T> {
+
+	static <T extends Targetable<T>> Capability<T> of(final Consumer<ApplicationContext<T>> applier, final Consumer<ApplicationContext<T>> finisher) {
+
+		return new Capability<>() {
+
+			@Override()
+			public void onApply(final ApplicationContext<T> ctx) {
+
+				applier.accept(ctx);
+			}
+
+			@Override()
+			public void onFinish(final ApplicationContext<T> ctx) {
+
+				finisher.accept(ctx);
+			}
+		};
+	}
 
 	void onApply(final ApplicationContext<T> ctx);
 
