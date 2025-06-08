@@ -26,7 +26,7 @@ package com.github.justhm228.applicables;
 
 public interface TargetHolder<T extends Targetable<T>> extends Targetable.Delegated<T> {
 
-	Targetable<T> getTarget();
+	T getTarget();
 
 	@Override()
 	default void apply(final Applicable<T> applicable) {
