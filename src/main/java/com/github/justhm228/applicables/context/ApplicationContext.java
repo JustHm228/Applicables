@@ -28,9 +28,15 @@ import com.github.justhm228.applicables.Applicable;
 import com.github.justhm228.applicables.target.TargetHolder;
 import com.github.justhm228.applicables.target.Targetable;
 
-public interface ApplicationContext<T extends Targetable<T>> extends TargetHolder.Delegated<T> {
+public interface ApplicationContext<T extends Targetable<T>> extends TargetHolder.Delegated<T>, AutoCloseable {
 
 	Applicable<T> getApplied();
 
 	void finish();
+
+	@Override()
+	default void close() {
+
+		finish();
+	}
 }
