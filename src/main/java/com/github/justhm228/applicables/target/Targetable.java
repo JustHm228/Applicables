@@ -35,7 +35,7 @@ public interface Targetable<T extends Targetable<T>> {
 		return adapter.adapt(o);
 	}
 
-	<A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable);
+	<A extends Applicable<T, A>> ApplicationContext<T, A> apply(final A applicable);
 
 	interface Adapted<T extends Adapted<T, O>, O> extends Targetable<T> {
 
@@ -48,7 +48,7 @@ public interface Targetable<T extends Targetable<T>> {
 		T getTarget();
 
 		@Override()
-		default <A extends Applicable<T>> ApplicationContext<T, A> apply(final A applicable) {
+		default <A extends Applicable<T, A>> ApplicationContext<T, A> apply(final A applicable) {
 
 			return getTarget().apply(applicable);
 		}

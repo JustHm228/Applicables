@@ -28,7 +28,7 @@ import com.github.justhm228.applicables.Applicable;
 import com.github.justhm228.applicables.target.TargetHolder;
 import com.github.justhm228.applicables.target.Targetable;
 
-public interface ApplicationContext<T extends Targetable<T>, A extends Applicable<T>> extends TargetHolder.Delegated<T> {
+public interface ApplicationContext<T extends Targetable<T>, A extends Applicable<T, A>> extends TargetHolder.Delegated<T> {
 
 	A getApplied();
 
