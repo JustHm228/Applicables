@@ -35,4 +35,15 @@ public interface TargetHolder<T extends Targetable<T>> extends Targetable.Delega
 
 		getTarget().apply(applicable);
 	}
+
+	interface Delegated<T extends Targetable<T>> extends TargetHolder<T> {
+
+		TargetHolder<T> getTargetHolder();
+
+		@Override()
+		default T getTarget() {
+
+			return getTargetHolder().getTarget();
+		}
+	}
 }
