@@ -43,7 +43,7 @@ public class SimpleApplicationContext<T extends Targetable<T>> implements Applic
 
 	public SimpleApplicationContext(final Applicable<T> applied, final TargetHolder<T> targetHolder) {
 
-		this(applied, targetHolder, true);
+		this(applied, targetHolder, false);
 	}
 
 	protected SimpleApplicationContext(final Applicable<T> applied, final TargetHolder<T> targetHolder, final boolean applies) {
