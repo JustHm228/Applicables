@@ -24,8 +24,6 @@
 
 package com.github.justhm228.applicables.target;
 
-import com.github.justhm228.applicables.Applicable;
-import com.github.justhm228.applicables.context.ApplicationContext;
 import static java.util.Objects.requireNonNull;
 
 public class DynamicTargetHolder<T extends Targetable<T>> implements TargetHolder.Mutable<T> {
@@ -56,11 +54,5 @@ public class DynamicTargetHolder<T extends Targetable<T>> implements TargetHolde
 
 			return target;
 		}
-	}
-
-	@Override()
-	public ApplicationContext<T> apply(final Applicable<T> applicable) {
-
-		return getTarget().apply(applicable);
 	}
 }
