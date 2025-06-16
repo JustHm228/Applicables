@@ -124,5 +124,15 @@ public interface Capability<T extends Targetable<T>> extends Applicable<T> {
 				Capability.super.apply(ctx);
 			}
 		}
+
+		@FunctionalInterface()
+		interface Delegated<T extends Targetable<T>> extends Capability.Delegated<T>, Capability.Instant<T> {
+
+			@Override()
+			default void apply(final ApplicationContext<T> ctx) {
+
+				Capability.Instant.super.apply(ctx);
+			}
+		}
 	}
 }
