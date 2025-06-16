@@ -97,7 +97,17 @@ public class SimpleApplicationContext<T extends Targetable<T>> implements Applic
 	@Override()
 	public void finish() {
 
-		finished = true;
+		try {
+
+			for (final Consumer<ApplicationContext<T>> finishHook : finishHooks) {
+
+				finishHook.accept(this);
+			}
+
+		} finally {
+
+			finished = true;
+		}
 	}
 
 	@Override()
