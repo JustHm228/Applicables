@@ -277,9 +277,9 @@ if (unchecked) WARNS.add(LintWarning.UNCHECKED)
 if (all) WARNS.add(LintWarning.ALL)
 if (none) WARNS.clear()
 
-println "| [i] Enabled linter warnings: " + WARNS
+println "| [i] Enabled linter warnings: ${WARNS}"
 
 tasks.withType(JavaCompile).configureEach {
 	final def linterOptions = configureLinter(options, WARNS)
-	println "| [i] Linter options: " + linterOptions
+	println "| [i] Linter options: ${linterOptions}"
 }
