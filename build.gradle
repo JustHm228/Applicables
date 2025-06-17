@@ -18,6 +18,51 @@ test {
 	useJUnitPlatform()
 }
 
+// ------------------ Compiler ------------------ //
+
+static void configureCompiler(final CompileOptions options) {
+	final def exports = exportClasses(options,
+			"jdk.internal.reflect.CallerSensitive",
+//			"jdk.internal.reflect.CallerSensitiveAdapter",
+	)
+	println "Exports: " + exports
+}
+
+tasks.withType(JavaCompile).configureEach {
+	configureCompiler(options)
+}
+
+static List<String> exports(final Class<?> cls) {
+
+	final List<String> args = new ArrayList<>(2)
+
+	args.add("--add-exports")
+	args.add(cls.module.name + "/" + cls.package.name + "=ALL-UNNAMED")
+	return args
+}
+
+static List<String> exports(final String className) {
+	return exports(Class.forName(className))
+}
+
+static List<String> exportClass(final CompileOptions options, final String className) {
+	final def option = exports(className)
+	options.compilerArgs.addAll(option)
+	return option
+}
+
+static List<String> exportClasses(final CompileOptions options, final String... classes) {
+
+	final List<String> option = new ArrayList<>(classes.length * 2)
+
+	Arrays.stream(classes).forEach {
+		final def exports = exportClass(options, it)
+		option.addAll(exports)
+	}
+
+	return option
+}
+
 // ------------------ Linter ------------------ //
 
 /**
