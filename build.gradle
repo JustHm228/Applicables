@@ -249,21 +249,21 @@ enum LintWarning {
 	/**
 	 * Resolves a list of {@link LintWarning} by their documented names.
 	 *
-	 * @param lints Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
+	 * @param names Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
 	 * @return A {@link List} of {@link LintWarning}s associated with the given names.
 	 */
-	static List<LintWarning> resolve(final Collection<String> lints) {
-		return lints.stream().map(LintWarning::resolve).collect(Collectors.toList())
+	static List<LintWarning> resolve(final Collection<String> names) {
+		return names.stream().map(LintWarning::resolve).collect(Collectors.toList())
 	}
 
 	/**
 	 * Resolves a set of {@link LintWarning} by their documented names.
 	 *
-	 * @param lints Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
+	 * @param names Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
 	 * @return A {@link Set} of {@link LintWarning}s associated with the given names.
 	 */
-	static Set<LintWarning> resolve(final Set<String> lints) {
-		return lints.stream().map(LintWarning::resolve).collect(Collectors.toSet())
+	static Set<LintWarning> resolve(final Set<String> names) {
+		return names.stream().map(LintWarning::resolve).collect(Collectors.toSet())
 	}
 
 	@Override()
