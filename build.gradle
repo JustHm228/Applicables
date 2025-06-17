@@ -230,33 +230,26 @@ enum LintWarning {
 	;
 
 	static LintWarning of(final String name) throws IllegalArgumentException {
-
 		return valueOf(name.replace('-', '_').toUpperCase())
 	}
 
 	static List<LintWarning> of(final Collection<String> lints) {
-
 		return lints.stream().map(LintWarning::of).collect(Collectors.toList())
 	}
 
 	static Set<LintWarning> of(final Set<String> lints) {
-
 		return lints.stream().map(LintWarning::of).collect(Collectors.toSet())
 	}
 
 	@Override()
 	String toString() {
-
 		return name().replace('_', '-').toLowerCase()
 	}
 }
 
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
 
-	if (warnings.isEmpty()) {
-
-		return null
-	}
+	if (warnings.isEmpty()) return null
 
 	@SuppressWarnings("all")
 	final StringBuilder lints = new StringBuilder("-Xlint:")
@@ -264,11 +257,8 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 	for (int i = 0; i < warnings.size(); i++) {
 
 		lints.append(warnings[i])
-
-		if (i != warnings.size() - 1) {
-
-			lints.append(',')
-		}
+		if (i == warnings.size() - 1) continue
+		lints.append(',')
 	}
 
 	options.compilerArgs.add(lints.toString())
@@ -276,7 +266,6 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 }
 
 static String configureLinter(final CompileOptions options, final Collection<LintWarning> warnings) {
-
 	return configureLinter(options, warnings instanceof List<LintWarning> ?
 			(List<LintWarning>) warnings : List.copyOf(warnings))
 }
