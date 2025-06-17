@@ -243,7 +243,8 @@ enum LintWarning {
 	 * @throws IllegalArgumentException If there is no {@link LintWarning} with such name.
 	 */
 	static LintWarning resolve(final String name) throws IllegalArgumentException {
-		return valueOf(name.replace('-', '_').toUpperCase())
+		final def resolvedName = name.replace('-', '_').toUpperCase()
+		return valueOf(resolvedName)
 	}
 
 	/**
