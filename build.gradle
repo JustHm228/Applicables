@@ -387,8 +387,11 @@ final def WARNS = LintWarning.resolve([
 
 if (deprecation) WARNS.add(LintWarning.DEPRECATION)     // Enable `deprecation` warnings if configured
 if (unchecked) WARNS.add(LintWarning.UNCHECKED)         // Enable `unchecked` warnings if configured
-if (all) WARNS.add(LintWarning.ALL)                     // Enable all warnings if configured
-if (none) WARNS.clear()                                 // Do not enable any warnings if configured
+
+if (all || none) {                                      // Enable all warnings if configured
+	WARNS.clear()                                       // Do not enable any warnings if configured
+	if (!none) WARNS.add(LintWarning.ALL)
+}
 
 println "| [i] Enabled linter warnings: ${WARNS}"
 
