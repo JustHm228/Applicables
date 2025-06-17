@@ -243,6 +243,7 @@ enum LintWarning {
 	 * @throws IllegalArgumentException If there is no {@link LintWarning} with such name.
 	 */
 	static LintWarning resolve(final String name) throws IllegalArgumentException {
+		assert name != null
 		final def resolvedName = name.replace('-', '_').toUpperCase()
 		try {
 			return valueOf(resolvedName)
@@ -260,6 +261,7 @@ enum LintWarning {
 	 * @throws IllegalArgumentException If the provided collection contains a name that couldn't be resolved.
 	 */
 	static List<LintWarning> resolve(final Collection<String> names) throws IllegalArgumentException {
+		assert names != null
 		return names.stream().map(LintWarning::resolve).collect(Collectors.toList())
 	}
 
@@ -271,6 +273,7 @@ enum LintWarning {
 	 * @throws IllegalArgumentException If the provided set contains a name that couldn't be resolved.
 	 */
 	static Set<LintWarning> resolve(final Set<String> names) throws IllegalArgumentException {
+		assert names != null
 		return names.stream().map(LintWarning::resolve).collect(Collectors.toSet())
 	}
 
