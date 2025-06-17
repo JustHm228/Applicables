@@ -235,14 +235,33 @@ enum LintWarning {
 	NONE,
 	;
 
+	/**
+	 * Resolves a {@link LintWarning} by its documented name.
+	 *
+	 * @param name A documented name for {@link LintWarning} as specified in output of <code>javac --help-lint</code>.
+	 * @return A {@link LintWarning} associated with the given name.
+	 * @throws IllegalArgumentException If there is no {@link LintWarning} with such name.
+	 */
 	static LintWarning resolve(final String name) throws IllegalArgumentException {
 		return valueOf(name.replace('-', '_').toUpperCase())
 	}
 
+	/**
+	 * Resolves a list of {@link LintWarning} by their documented names.
+	 *
+	 * @param lints Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
+	 * @return A {@link List} of {@link LintWarning}s associated with the given names.
+	 */
 	static List<LintWarning> resolve(final Collection<String> lints) {
 		return lints.stream().map(LintWarning::resolve).collect(Collectors.toList())
 	}
 
+	/**
+	 * Resolves a set of {@link LintWarning} by their documented names.
+	 *
+	 * @param lints Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
+	 * @return A {@link Set} of {@link LintWarning}s associated with the given names.
+	 */
 	static Set<LintWarning> resolve(final Set<String> lints) {
 		return lints.stream().map(LintWarning::resolve).collect(Collectors.toSet())
 	}
