@@ -251,8 +251,9 @@ enum LintWarning {
 	 *
 	 * @param names Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
 	 * @return A {@link List} of {@link LintWarning}s associated with the given names.
+	 * @throws IllegalArgumentException If the provided collection contains a name that couldn't be resolved.
 	 */
-	static List<LintWarning> resolve(final Collection<String> names) {
+	static List<LintWarning> resolve(final Collection<String> names) throws IllegalArgumentException {
 		return names.stream().map(LintWarning::resolve).collect(Collectors.toList())
 	}
 
@@ -261,8 +262,9 @@ enum LintWarning {
 	 *
 	 * @param names Documented names for {@link LintWarning}s as specified in output of <code>javac --help-lint</code>.
 	 * @return A {@link Set} of {@link LintWarning}s associated with the given names.
+	 * @throws IllegalArgumentException If the provided set contains a name that couldn't be resolved.
 	 */
-	static Set<LintWarning> resolve(final Set<String> names) {
+	static Set<LintWarning> resolve(final Set<String> names) throws IllegalArgumentException {
 		return names.stream().map(LintWarning::resolve).collect(Collectors.toSet())
 	}
 
