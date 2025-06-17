@@ -20,6 +20,21 @@ test {
 
 // ------------------ Linter ------------------ //
 
+/**
+ * Enable all warnings
+ */
+def all = false
+
+/**
+ * Warn about unchecked operations.
+ */
+def unchecked = false
+
+/**
+ * Disable all warnings
+ */
+def none = false
+
 import java.util.stream.Collectors
 
 enum LintWarning {
@@ -268,6 +283,10 @@ static String configureLinter(final CompileOptions options, final Collection<Lin
 
 final def WARNS = LintWarning.of([
 ] as Set<String>)
+
+if (unchecked) WARNS.add(LintWarning.UNCHECKED)
+if (all) WARNS.add(LintWarning.ALL)
+if (none) WARNS.clear()
 
 println "| [i] Enabled linter warnings: " + WARNS
 
