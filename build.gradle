@@ -298,7 +298,7 @@ enum LintWarning {
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
 
 	assert options != null
-	if (warnings.isEmpty()) return null // Do not configure linter if there is no warnings to be enabled
+	if (warnings == null || warnings.isEmpty()) return null // Do not configure linter if there is no warnings to be enabled
 
 	// Generate a valid `-Xlint` option:
 	final StringBuilder option = new StringBuilder("-Xlint:")
