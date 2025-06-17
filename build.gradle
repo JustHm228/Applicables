@@ -298,18 +298,22 @@ enum LintWarning {
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
 
 	assert options != null
-	if (warnings.isEmpty()) return null
+	if (warnings.isEmpty()) return null // Do not configure linter if there is no warnings to be enabled
 
+	// Generate a valid `-Xlint` option:
 	final StringBuilder option = new StringBuilder("-Xlint:")
 
 	for (int i = 0; i < warnings.size(); i++) {
 
 		option.append(warnings[i])
+
+		// Place a comma to separate (if necessary):
 		if (i == warnings.size() - 1) continue
 		option.append(',')
 	}
 
-	options.compilerArgs.add(option.toString())
+	// Generation finished!
+	options.compilerArgs.add(option.toString()) // Pass the generated option to the compiler
 	return option.toString()
 }
 
