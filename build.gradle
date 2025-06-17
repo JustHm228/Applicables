@@ -282,6 +282,7 @@ static String configureLinter(final CompileOptions options, final Collection<Lin
 }
 
 final def WARNS = LintWarning.of([
+//		"none",
 ] as Set<String>)
 
 if (unchecked) WARNS.add(LintWarning.UNCHECKED)
