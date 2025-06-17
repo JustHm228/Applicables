@@ -285,6 +285,13 @@ enum LintWarning {
 	}
 }
 
+/**
+ * Passes the given list of {@link LintWarning}s to the given {@link CompileOptions}.
+ *
+ * @param options The {@link CompileOptions} to be configured.
+ * @param warnings A {@link List} of {@link LintWarning}s to be enabled in linter.
+ * @return The passed <code>-Xlint</code> option.
+ */
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
 
 	if (warnings.isEmpty()) return null
@@ -302,6 +309,12 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 	return lints.toString()
 }
 
+/**
+ * Passes the given collection of {@link LintWarning}s to the given {@link CompileOptions}.
+ * @param options The {@link CompileOptions} to be configured.
+ * @param warnings A {@link Collection} of {@link LintWarning}s to be enabled in linter.
+ * @return The passed <code>-Xlint</code> option.
+ */
 static String configureLinter(final CompileOptions options, final Collection<LintWarning> warnings) {
 	return configureLinter(options, warnings instanceof List<LintWarning> ?
 			(List<LintWarning>) warnings : List.copyOf(warnings))
