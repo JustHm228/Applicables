@@ -47,7 +47,7 @@ enum LintWarning {
 	/**
 	 * Warn about an auxiliary class that is hidden in a source file, and is used from other files.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for this constant
 	AUXILIARYCLASS,
 
 	/**
@@ -58,7 +58,7 @@ enum LintWarning {
 	/**
 	 * Warn about issues related to classfile contents.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for this constant and its javadoc
 	CLASSFILE,
 
 	/**
@@ -74,7 +74,7 @@ enum LintWarning {
 	/**
 	 * Warn about division by constant integer 0.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for this constant
 	DIVZERO,
 
 	/**
@@ -105,7 +105,7 @@ enum LintWarning {
 	/**
 	 * Warn about missing explicit constructors in public and protected classes in exported packages.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for this constant
 	MISSING_EXPLICIT_CTOR,
 
 	/**
@@ -152,7 +152,7 @@ enum LintWarning {
 	/**
 	 * Warn about use of raw types.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for this constant
 	RAWTYPES,
 
 	/**
@@ -200,7 +200,7 @@ enum LintWarning {
 	 * Warn when a constructor invokes a method that could be overriden in an external subclass.
 	 * Such a method would execute before the subclass constructor completes its initialization.
 	 */
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for javadoc of this constant
 	THIS_ESCAPE,
 
 	/**
@@ -251,7 +251,7 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 
 	if (warnings.isEmpty()) return null
 
-	@SuppressWarnings("all")
+	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for the initially passed string (it didn't help :/)
 	final StringBuilder lints = new StringBuilder("-Xlint:")
 
 	for (int i = 0; i < warnings.size(); i++) {
