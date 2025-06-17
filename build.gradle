@@ -71,6 +71,11 @@ static List<String> exportClasses(final CompileOptions options, final String... 
 def all = false
 
 /**
+ * Warn about use of deprecated items.
+ */
+def deprecation = true
+
+/**
  * Warn about unchecked operations.
  */
 def unchecked = false
@@ -380,6 +385,7 @@ final def WARNS = LintWarning.resolve([
 //		"none",
 ] as Set<String>)
 
+if (deprecation) WARNS.add(LintWarning.DEPRECATION) // Enable `deprecation` warnings if configured
 if (unchecked) WARNS.add(LintWarning.UNCHECKED) // Enable `unchecked` warnings if configured
 if (all) WARNS.add(LintWarning.ALL)             // Enable all warnings if configured
 if (none) WARNS.clear()                         // Do not enable any warnings if configured
