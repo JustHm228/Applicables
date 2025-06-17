@@ -296,17 +296,17 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 
 	if (warnings.isEmpty()) return null
 
-	final StringBuilder lints = new StringBuilder("-Xlint:")
+	final StringBuilder option = new StringBuilder("-Xlint:")
 
 	for (int i = 0; i < warnings.size(); i++) {
 
-		lints.append(warnings[i])
+		option.append(warnings[i])
 		if (i == warnings.size() - 1) continue
-		lints.append(',')
+		option.append(',')
 	}
 
-	options.compilerArgs.add(lints.toString())
-	return lints.toString()
+	options.compilerArgs.add(option.toString())
+	return option.toString()
 }
 
 /**
