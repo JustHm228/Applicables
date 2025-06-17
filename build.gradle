@@ -233,7 +233,7 @@ enum LintWarning {
 	 * Disable all warnings
 	 */
 	NONE,
-	;
+	; // <- This semicolon is required to be on the next line to make Git commits with potential changes easier
 
 	/**
 	 * Resolves a {@link LintWarning} by its documented name.
