@@ -37,6 +37,12 @@ def none = false
 
 import java.util.stream.Collectors
 
+/**
+ * Represents all values of flag <code>-Xlint</code> of the <code>javac</code> compiler.
+ * <p>
+ *     All descriptions were taken from the output of command <code>javac --help-lint</code> for Oracle Java 21.0.5.
+ * </p>
+ */
 enum LintWarning {
 
 	/**
