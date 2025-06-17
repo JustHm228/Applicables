@@ -17,3 +17,261 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+// ------------------ Linter ------------------ //
+
+import java.util.stream.Collectors
+
+enum LintWarning {
+
+	/**
+	 * Enable all warnings
+	 */
+	ALL,
+
+	/**
+	 * Warn about an auxiliary class that is hidden in a source file, and is used from other files.
+	 */
+	@SuppressWarnings("all")
+	AUXILIARYCLASS,
+
+	/**
+	 * Warn about use of unnecessary casts.
+	 */
+	CAST,
+
+	/**
+	 * Warn about issues related to classfile contents.
+	 */
+	@SuppressWarnings("all")
+	CLASSFILE,
+
+	/**
+	 * Warn about use of deprecated items.
+	 */
+	DEPRECATION,
+
+	/**
+	 * Warn about items marked as deprecated in JavaDoc but not using the @Deprecated annotation.
+	 */
+	DEP_ANN,
+
+	/**
+	 * Warn about division by constant integer 0.
+	 */
+	@SuppressWarnings("all")
+	DIVZERO,
+
+	/**
+	 * Warn about empty statement after if.
+	 */
+	EMPTY,
+
+	/**
+	 * Warn about issues regarding module exports.
+	 */
+	EXPORTS,
+
+	/**
+	 * Warn about falling through from one case of a switch statement to the next.
+	 */
+	FALLTHROUGH,
+
+	/**
+	 * Warn about finally clauses that do not terminate normally.
+	 */
+	FINALLY,
+
+	/**
+	 * Warn about possible lossy conversions in compound assignment.
+	 */
+	LOSSY_CONVERSIONS,
+
+	/**
+	 * Warn about missing explicit constructors in public and protected classes in exported packages.
+	 */
+	@SuppressWarnings("all")
+	MISSING_EXPLICIT_CTOR,
+
+	/**
+	 * Warn about module system related issues.
+	 */
+	MODULE,
+
+	/**
+	 * Warn about issues regarding module opens.
+	 */
+	OPENS,
+
+	/**
+	 * Warn about issues relating to use of command line options.
+	 */
+	OPTIONS,
+
+	/**
+	 * Warn when an output file is overwritten during compilation. This can occur, for example,
+	 * on case-insensitive filesystems. Covers class files, native header files, and source files.
+	 */
+	OUTPUT_FILE_CLASH,
+
+	/**
+	 * Warn about issues regarding method overloads.
+	 */
+	OVERLOADS,
+
+	/**
+	 * Warn about issues regarding method overrides.
+	 */
+	OVERRIDES,
+
+	/**
+	 * Warn about invalid path elements on the command line.
+	 */
+	PATH,
+
+	/**
+	 * Warn about issues regarding annotation processing.
+	 */
+	PROCESSING,
+
+	/**
+	 * Warn about use of raw types.
+	 */
+	@SuppressWarnings("all")
+	RAWTYPES,
+
+	/**
+	 * Warn about use of API that has been marked for removal.
+	 */
+	REMOVAL,
+
+	/**
+	 * Warn about use of automatic modules in the requires clauses.
+	 */
+	REQUIRES_AUTOMATIC,
+
+	/**
+	 * Warn about automatic modules in requires transitive.
+	 */
+	REQUIRES_TRANSITIVE_AUTOMATIC,
+
+	/**
+	 * Warn about Serializable classes that do not have a serialVersionUID field.
+	 * Also warn about other suspect declarations in Serializable and Externalizable classes and interfaces.
+	 */
+	SERIAL,
+
+	/**
+	 * Warn about accessing a static member using an instance.
+	 */
+	STATIC,
+
+	/**
+	 * Warn about unnecessary use of the strictfp modifier.
+	 */
+	STRICTFP,
+
+	/**
+	 * Warn about synchronization attempts on instances of value-based classes.
+	 */
+	SYNCHRONIZATION,
+
+	/**
+	 * Warn about inconsistent white space characters in text block indentation.
+	 */
+	TEXT_BLOCKS,
+
+	/**
+	 * Warn when a constructor invokes a method that could be overriden in an external subclass.
+	 * Such a method would execute before the subclass constructor completes its initialization.
+	 */
+	@SuppressWarnings("all")
+	THIS_ESCAPE,
+
+	/**
+	 * Warn about issues relating to use of try blocks (i.e. try-with-resources).
+	 */
+	TRY,
+
+	/**
+	 * Warn about unchecked operations.
+	 */
+	UNCHECKED,
+
+	/**
+	 * Warn about potentially unsafe vararg methods.
+	 */
+	VARARGS,
+
+	/**
+	 * Warn about use of preview language features.
+	 */
+	PREVIEW,
+
+	/**
+	 * Disable all warnings
+	 */
+	NONE,
+	;
+
+	static LintWarning of(final String name) throws IllegalArgumentException {
+
+		return valueOf(name.replace('-', '_').toUpperCase())
+	}
+
+	static List<LintWarning> of(final Collection<String> lints) {
+
+		return lints.stream().map(LintWarning::of).collect(Collectors.toList())
+	}
+
+	static Set<LintWarning> of(final Set<String> lints) {
+
+		return lints.stream().map(LintWarning::of).collect(Collectors.toSet())
+	}
+
+	@Override()
+	String toString() {
+
+		return name().replace('_', '-').toLowerCase()
+	}
+}
+
+static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
+
+	if (warnings.isEmpty()) {
+
+		return null
+	}
+
+	@SuppressWarnings("all")
+	final StringBuilder lints = new StringBuilder("-Xlint:")
+
+	for (int i = 0; i < warnings.size(); i++) {
+
+		lints.append(warnings[i])
+
+		if (i != warnings.size() - 1) {
+
+			lints.append(',')
+		}
+	}
+
+	options.compilerArgs.add(lints.toString())
+	return lints.toString()
+}
+
+static String configureLinter(final CompileOptions options, final Collection<LintWarning> warnings) {
+
+	return configureLinter(options, warnings instanceof List<LintWarning> ?
+			(List<LintWarning>) warnings : List.copyOf(warnings))
+}
+
+final def WARNS = LintWarning.of([
+] as Set<String>)
+
+println "| [i] Enabled linter warnings: " + WARNS
+
+tasks.withType(JavaCompile).configureEach {
+	final def lints = configureLinter(options, WARNS)
+	println "| [i] Linter options: " + lints
+}
