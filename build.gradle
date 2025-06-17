@@ -229,16 +229,16 @@ enum LintWarning {
 	NONE,
 	;
 
-	static LintWarning of(final String name) throws IllegalArgumentException {
+	static LintWarning resolve(final String name) throws IllegalArgumentException {
 		return valueOf(name.replace('-', '_').toUpperCase())
 	}
 
-	static List<LintWarning> of(final Collection<String> lints) {
-		return lints.stream().map(LintWarning::of).collect(Collectors.toList())
+	static List<LintWarning> resolve(final Collection<String> lints) {
+		return lints.stream().map(LintWarning::resolve).collect(Collectors.toList())
 	}
 
-	static Set<LintWarning> of(final Set<String> lints) {
-		return lints.stream().map(LintWarning::of).collect(Collectors.toSet())
+	static Set<LintWarning> resolve(final Set<String> lints) {
+		return lints.stream().map(LintWarning::resolve).collect(Collectors.toSet())
 	}
 
 	@Override()
@@ -270,7 +270,7 @@ static String configureLinter(final CompileOptions options, final Collection<Lin
 			(List<LintWarning>) warnings : List.copyOf(warnings))
 }
 
-final def WARNS = LintWarning.of([
+final def WARNS = LintWarning.resolve([
 //		"none",
 ] as Set<String>)
 
