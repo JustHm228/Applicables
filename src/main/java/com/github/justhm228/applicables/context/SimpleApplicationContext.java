@@ -46,6 +46,7 @@ public class SimpleApplicationContext<T extends Targetable<T>> implements Applic
 		this(applied, targetHolder, false);
 	}
 
+	@SuppressWarnings("this-escape")
 	protected SimpleApplicationContext(final Applicable<T> applied, final TargetHolder<T> targetHolder, final boolean applies) {
 
 		super();
