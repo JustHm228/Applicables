@@ -294,6 +294,7 @@ enum LintWarning {
  */
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
 
+	assert options != null
 	if (warnings.isEmpty()) return null
 
 	final StringBuilder option = new StringBuilder("-Xlint:")
