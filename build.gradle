@@ -244,7 +244,12 @@ enum LintWarning {
 	 */
 	static LintWarning resolve(final String name) throws IllegalArgumentException {
 		final def resolvedName = name.replace('-', '_').toUpperCase()
-		return valueOf(resolvedName)
+		try {
+			return valueOf(resolvedName)
+		} catch (final IllegalArgumentException notResolved) {
+			throw new IllegalArgumentException("There is no LintWarning named ${name} (${resolvedName}). " +
+					"You should pass a name, as it is documented in `javac --help-lint`!", notResolved)
+		}
 	}
 
 	/**
