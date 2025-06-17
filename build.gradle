@@ -251,7 +251,6 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 
 	if (warnings.isEmpty()) return null
 
-	@SuppressWarnings("all") // <- To disable IntelliJ IDEA's typo highlighting for the initially passed string (it didn't help :/)
 	final StringBuilder lints = new StringBuilder("-Xlint:")
 
 	for (int i = 0; i < warnings.size(); i++) {
