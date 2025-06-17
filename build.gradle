@@ -328,16 +328,20 @@ static String configureLinter(final CompileOptions options, final Collection<Lin
 			(List<LintWarning>) warnings : List.copyOf(warnings))
 }
 
+/**
+ * A {@link Set} of {@link LintWarning}s to be enabled.
+ */
 final def WARNS = LintWarning.resolve([
 //		"none",
 ] as Set<String>)
 
-if (unchecked) WARNS.add(LintWarning.UNCHECKED)
-if (all) WARNS.add(LintWarning.ALL)
-if (none) WARNS.clear()
+if (unchecked) WARNS.add(LintWarning.UNCHECKED) // Enable `unchecked` warnings if configured
+if (all) WARNS.add(LintWarning.ALL)             // Enable all warnings if configured
+if (none) WARNS.clear()                         // Do not enable any warnings if configured
 
 println "| [i] Enabled linter warnings: ${WARNS}"
 
+// Configure linter:
 tasks.withType(JavaCompile).configureEach {
 	final def linterOptions = configureLinter(options, WARNS)
 	println "| [i] Linter options: ${linterOptions}"
