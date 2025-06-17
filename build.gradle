@@ -281,6 +281,6 @@ if (none) WARNS.clear()
 println "| [i] Enabled linter warnings: " + WARNS
 
 tasks.withType(JavaCompile).configureEach {
-	final def lints = configureLinter(options, WARNS)
-	println "| [i] Linter options: " + lints
+	final def linterOptions = configureLinter(options, WARNS)
+	println "| [i] Linter options: " + linterOptions
 }
