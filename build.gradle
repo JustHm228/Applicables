@@ -292,7 +292,7 @@ enum LintWarning {
  * Passes the given list of {@link LintWarning}s to the given {@link CompileOptions}.
  *
  * @param options The {@link CompileOptions} to be configured.
- * @param warnings A {@link List} of {@link LintWarning}s to be enabled in linter.
+ * @param warnings A {@link List} of {@link LintWarning}s to be passed to linter.
  * @return The passed <code>-Xlint</code> option.
  */
 static String configureLinter(final CompileOptions options, final List<LintWarning> warnings) {
@@ -320,7 +320,7 @@ static String configureLinter(final CompileOptions options, final List<LintWarni
 /**
  * Passes the given collection of {@link LintWarning}s to the given {@link CompileOptions}.
  * @param options The {@link CompileOptions} to be configured.
- * @param warnings A {@link Collection} of {@link LintWarning}s to be enabled in linter.
+ * @param warnings A {@link Collection} of {@link LintWarning}s to be passed to linter.
  * @return The passed <code>-Xlint</code> option.
  */
 static String configureLinter(final CompileOptions options, final Collection<LintWarning> warnings) {
