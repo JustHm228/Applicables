@@ -26,8 +26,14 @@ package com.github.justhm228.applicables.target;
 
 import com.github.justhm228.applicables.Applicable;
 import com.github.justhm228.applicables.context.ApplicationContext;
+import static java.util.Objects.requireNonNull;
 
 public record StaticTargetHolder<T extends Targetable<T>>(T target) implements TargetHolder.Immutable<T> {
+
+	public StaticTargetHolder {
+
+		requireNonNull(target);
+	}
 
 	@Override()
 	public T getTarget() {
