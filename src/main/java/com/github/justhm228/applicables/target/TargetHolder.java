@@ -27,12 +27,12 @@ package com.github.justhm228.applicables.target;
 public sealed interface TargetHolder<T extends Targetable<T>> extends Targetable.Delegated<T>
 		permits TargetHolder.Delegated, TargetHolder.Immutable, TargetHolder.Mutable {
 
-	static <T extends Targetable<T>> TargetHolder.Immutable<T> ofImmutable(final T target) {
+	static <T extends Targetable<T>> TargetHolder.Immutable<T> ofImmutable(final T target) throws NullPointerException {
 
 		return new StaticTargetHolder<>(target);
 	}
 
-	static <T extends Targetable<T>> TargetHolder.Mutable<T> ofMutable(final T target) {
+	static <T extends Targetable<T>> TargetHolder.Mutable<T> ofMutable(final T target) throws NullPointerException {
 
 		return new DynamicTargetHolder<>(target);
 	}
